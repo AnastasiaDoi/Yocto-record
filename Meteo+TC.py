@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Display and recording script for simultaneous usage
 # of one Yocto-Meteo and/or one Yocto-Thermocouples Modules
-# Tested with Python 3.3 
+# Tested with Python 3.3 (http://www.python.org/download/)
 # Make sure to copy \YoctoLib.python.XXXX\Source\ directory content
 # downloadable here http://www.yoctopuce.com/EN/libraries.php
 # to \Python3.3\Lib\ directory (with Python Path declared for Windows)
