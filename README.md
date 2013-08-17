@@ -15,3 +15,29 @@ At the same type a text file is created, updated every second: **Date-Time-Modul
 Separators are spaces, easily importable in Libreoffice Calc, Excel or any plotting software
 
 This is a draft version, tested with two modules, works in direct usb mode, but still buggy when VirtualHub is running...
+
+## Required components
+
+* Yocto-Meteo and/or Yocto-Thermocouples modules from yoctopuce (http://www.yoctopuce.com/)
+* Yoctopuce Python libraries http://www.yoctopuce.com/EN/libraries.php (YoctoLib.python.XXXX.zip)
+* Python 3.x : http://www.python.org/download/
+* Meteo+TC.py script
+
+## Installation
+
+* Install Python (with option to declare path)
+* Copy content of the directory \YoctoLib.python.XXXX\Source\
+* to ~\Python3.3\Lib\ directory were Python was installed
+
+## Starting the program 
+
+* Put Meteo+TC.py on any directory, where the datafiles will be stored
+* Open command prompt in this directory (shift+right click in Explorer)
+* Type Meteo+TC.py
+* Names of the recognized modules should appear
+* Date, time, temperatures, pressure & humidity should be displayed every second
+* Same date should be saved in text file in column 
+* Name of the text file will Date, time, modules types,  for example: 2013-08-18-08-12-21-Thermo-Meteo.txt
+* Import data file in any graphic software
+* Type [Ctrl+C] to stop
+
