@@ -22,7 +22,7 @@ This is a draft version, tested with two modules, works in direct usb mode, but 
 
 * Yocto-Meteo and/or Yocto-Thermocouples modules from yoctopuce (http://www.yoctopuce.com/)
 * Yoctopuce Python libraries http://www.yoctopuce.com/EN/libraries.php (YoctoLib.python.XXXX.zip)
-* Python 3.x : http://www.python.org/download/
+* Python 3.x: http://www.python.org/download/
 * Meteo+TC.py script
 
 ## Installation
@@ -42,8 +42,9 @@ This is a draft version, tested with two modules, works in direct usb mode, but 
 * Name of the text file will be Date-time-modules-types.txt
 * for example: 2013-08-18-08-12-21-Thermo-Meteo.txt
 
-## Stoping the programm
+## Stoping the program
 
 * Type [Ctrl+C] to stop
 * Import data file in any graphic software
+* Have fun !
 
