@@ -16,6 +16,8 @@ Separators are spaces, easily importable in Libreoffice Calc, Excel or any plott
 
 This is a draft version, tested with two modules, works in direct usb mode, but still buggy when VirtualHub is running...
 
+***
+
 ## Required components
 
 * Yocto-Meteo and/or Yocto-Thermocouples modules from yoctopuce (http://www.yoctopuce.com/)
