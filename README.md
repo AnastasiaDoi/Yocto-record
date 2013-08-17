@@ -6,7 +6,7 @@ Data recording for Yoctopuce Meteo (Weather) and Thermocouples modules in Python
 This small program allows displaying in a terminal (text mode, updated every second):
 * Pressure
 * Humidity
-* Temperature
+* Temperature(s)
 
 from **[Yocto-Meteo](http://www.yoctopuce.com/EN/products/capteurs-usb/yocto-meteo)** module
 and/or two temperatures from **[Yocto-Thermocouples](http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple)** module.
@@ -39,7 +39,11 @@ This is a draft version, tested with two modules, works in direct usb mode, but 
 * Names of the recognized modules should appear
 * Date, time, temperatures, pressure & humidity should be displayed every second
 * Same date should be saved in text file in column 
-* Name of the text file will Date, time, modules types,  for example: 2013-08-18-08-12-21-Thermo-Meteo.txt
-* Import data file in any graphic software
+* Name of the text file will be Date-time-modules-types.txt
+* for example: 2013-08-18-08-12-21-Thermo-Meteo.txt
+
+## Stoping the programm
+
 * Type [Ctrl+C] to stop
+* Import data file in any graphic software
 
