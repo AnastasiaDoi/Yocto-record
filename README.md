@@ -13,4 +13,4 @@ from Yoctopuce Meteo module and/or two temperatures from Yoctopuce Thermocouples
 At the same type a text file is created, updated every second: Date-Time-Module1-Module2.txt. 
 Separators are spaces, easily importable in Libreoffice Calc, Excel or any plotting software
 
-This is a draft version, tested with two modules, direct usb mode, still buggy when VirtualHub is running.
+This is a draft version, tested with two modules, direct usb mode, still buggy when VirtualHub is running...
