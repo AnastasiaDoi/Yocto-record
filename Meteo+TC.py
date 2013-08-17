@@ -15,7 +15,7 @@ from yocto_humidity import *
 from yocto_temperature import *
 from yocto_pressure import *
 
-#Manage connexion or module error messages
+# Manage connexion or module error messages
 def die(msg): sys.exit(msg+' (check USB cable)')
 
 errmsg=YRefParam()
