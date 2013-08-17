@@ -1,34 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Yoctopuce-meteo-temperature by SebastienCaillat</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <title>Yoctopuce-meteo-temperature by SebastienCaillat</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Yoctopuce-meteo-temperature</h1>
-        <p>Data recording for Yoctopuce Meteo (Weather) and Thermocouples modules in Python </p>
+    <div id="container">
+      <div class="inner">
 
-        <p class="view"><a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature">View the Project on GitHub <small>SebastienCaillat/Yoctopuce-Meteo-Temperature</small></a></p>
+        <header>
+          <h1>Yoctopuce-meteo-temperature</h1>
+          <h2>Data recording for Yoctopuce Meteo (Weather) and Thermocouples modules in Python </h2>
+        </header>
 
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
 
-        <ul>
-          <li><a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
+        <hr>
+
+        <section id="main_content">
+          <h1>
 <a name="yoctopuce-meteo-temperature" class="anchor" href="#yoctopuce-meteo-temperature"><span class="octicon octicon-link"></span></a>Yoctopuce-Meteo-Temperature</h1>
 
 <h1></h1>
@@ -48,13 +51,46 @@ and/or two temperatures from <strong><a href="http://www.yoctopuce.com/EN/produc
 Separators are spaces, easily importable in Libreoffice Calc, Excel or any plotting software</p>
 
 <p>This is a draft version, tested with two modules, works in direct usb mode, but still buggy when VirtualHub is running...</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/SebastienCaillat">SebastienCaillat</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+
+<hr><h2>
+<a name="required-components" class="anchor" href="#required-components"><span class="octicon octicon-link"></span></a>Required components</h2>
+
+<ul>
+<li>Yocto-Meteo and/or Yocto-Thermocouples modules from yoctopuce (<a href="http://www.yoctopuce.com/">http://www.yoctopuce.com/</a>)</li>
+<li>Yoctopuce Python libraries <a href="http://www.yoctopuce.com/EN/libraries.php">http://www.yoctopuce.com/EN/libraries.php</a> (YoctoLib.python.XXXX.zip)</li>
+<li>Python 3.x : <a href="http://www.python.org/download/">http://www.python.org/download/</a>
+</li>
+<li>Meteo+TC.py script</li>
+</ul><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<ul>
+<li>Install Python (with option to declare path)</li>
+<li>Copy content of the directory \YoctoLib.python.XXXX\Source\</li>
+<li>to ~\Python3.3\Lib\ directory were Python was installed</li>
+</ul><h2>
+<a name="starting-the-program" class="anchor" href="#starting-the-program"><span class="octicon octicon-link"></span></a>Starting the program</h2>
+
+<ul>
+<li>Put Meteo+TC.py on any directory, where the datafiles will be stored</li>
+<li>Open command prompt in this directory (shift+right click in Explorer)</li>
+<li>Type Meteo+TC.py</li>
+<li>Names of the recognized modules should appear</li>
+<li>Date, time, temperatures, pressure &amp; humidity should be displayed every second</li>
+<li>Same date should be saved in text file in column </li>
+<li>Name of the text file will Date, time, modules types,  for example: 2013-08-18-08-12-21-Thermo-Meteo.txt</li>
+<li>Import data file in any graphic software</li>
+<li>Type [Ctrl+C] to stop</li>
+</ul>
+        </section>
+
+        <footer>
+          Yoctopuce-meteo-temperature is maintained by <a href="https://github.com/SebastienCaillat">SebastienCaillat</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
   </body>
 </html>
