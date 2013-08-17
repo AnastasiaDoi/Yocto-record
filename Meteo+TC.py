@@ -119,7 +119,9 @@ nowdash = time.strftime('%Y-%m-%d-%H-%M-%S')
 filename = nowdash+'-'+filename+'.txt'
 print ("Data file name: "+filename)
 
-# Open data file then print & save data
+# Open data file
+# then print on terminal & save data to file
+# every second, or more depending on 'sleeptime' value  
 f=open(filename,'w')
 
 if (module1 == 'Meteo' or module2 == 'Meteo') and (modulequantity == 1\
@@ -173,3 +175,4 @@ if (module1 == 'Thermo' or module2 == 'Thermo' or module3 == 'Thermo')\
         + " %2.1f" % channel1.get_currentValue()\
         + " %2.1f" % channel2.get_currentValue()+" \n")    
         YAPI.Sleep(sleeptime)
+
