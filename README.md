@@ -14,7 +14,7 @@ and/or zero to three thermocouples **[Yocto-Thermocouples](http://www.yoctopuce.
 At the same type a text file is created, updated every second (by default): **Date-Time-Module1-Module2-....txt**. 
 Separators are spaces, easily importable in Libreoffice Calc, Excel or any plotting software
 
-This is a draft version, tested with three modules, works in direct usb mode, but still buggy when VirtualHub is running...
+This is a draft version, tested with three modules (1 Meteo & 2 thermocouples), works in direct usb mode, or with VirtualHub running.
 
 ***
 
