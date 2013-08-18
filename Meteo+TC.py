@@ -6,6 +6,12 @@
 # Make sure to copy \YoctoLib.python.XXXX\Source\ directory content
 # downloadable here http://www.yoctopuce.com/EN/libraries.php
 # to \Python3.3\Lib\ directory (with Python Path declared for Windows)
+# or uncomment following lines to add ../../Sources to the PYTHONPATH (adjust for your case)
+# sys.path.append(os.path.join("..","..","Sources"))
+# For detailed instructions, please connect to:
+# https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/
+# Type meteo+tc.py in console to start program
+# Type meteo+tc.py name to append 'name' to the file name (optional)
 # Last update S. Caillat 18/08/2013
 
 import os,sys,time #python lib to be used
@@ -20,22 +26,12 @@ def die(msg): sys.exit(msg+' (check USB cable)')
 
 errmsg=YRefParam()
 
+if len(sys.argv) > 1 : projectname=sys.argv[1]  # Project name to add to filename
+
 if YAPI.RegisterHub("http://127.0.0.1:4444") == 0:
     print ("VirtualHub is on")
 if YAPI.RegisterHub("usb") == 0:
     print ("VirtualHub is off")
-
-#if YAPI.RegisterHub("usb", errmsg)!= YAPI.SUCCESS:
-#    if YAPI.RegisterHub("http://127.0.0.1:4444", errmsg) != YAPI.SUCCESS:
-#        sys.exit("init error"+errmsg.value)
-    
-#if YAPI.RegisterHub("http://127.0.0.1:4444", errmsg) == YAPI.SUCCESS\
-#    or YAPI.RegisterHub("usb", errmsg)== YAPI.SUCCESS:
-#    sys.exit("init error"+errmsg.value)
-# Setup the API to use local USB devices
-#if YAPI.RegisterHub("http://127.0.0.1:4444", errmsg)!= YAPI.SUCCESS:
-#if YAPI.RegisterHub("usb", errmsg)!= YAPI.SUCCESS :
-#    sys.exit("init error"+errmsg.value)
 
 # retreive any humidity and temperature sensor
 sensorH = YHumidity.FirstHumidity()
@@ -110,11 +106,12 @@ while module is not None:
      module = module.nextModule()
 print ("Total:",modulequantity, "module(s) connected")
 
-#Define data file name date/time/module(s)
+#Define data file name date-time-module(s).txt
 filename = module1
 if modulequantity == 2: filename = filename+'-'+module2
 if modulequantity == 3: filename = filename+'-'+module2+'-'+module3
 nowdash = time.strftime('%Y-%m-%d-%H-%M-%S')
+if len(sys.argv) > 1 : filename = filename+'-'+projectname
 filename = nowdash+'-'+filename+'.txt'
 print ("Data file name: "+filename)
 
