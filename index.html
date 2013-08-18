@@ -44,13 +44,13 @@
 <li>Pressure</li>
 <li>Humidity</li>
 <li>Temperature(s)</li>
-</ul><p>from <strong><a href="http://www.yoctopuce.com/EN/products/capteurs-usb/yocto-meteo">Yocto-Meteo</a></strong> module
-and/or two temperatures from <strong><a href="http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple">Yocto-Thermocouples</a></strong> module.</p>
+</ul><p>from zero to one <strong><a href="http://www.yoctopuce.com/EN/products/capteurs-usb/yocto-meteo">Yocto-Meteo</a></strong> module
+and/or zero to three thermocouples <strong><a href="http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple">Yocto-Thermocouples</a></strong> module(s).</p>
 
-<p>At the same type a text file is created, updated every second: <strong>Date-Time-Module1-Module2.txt</strong>. 
+<p>At the same type a text file is created, updated every second (by default): <strong>Date-Time-Module1-Module2-....txt</strong>. 
 Separators are spaces, easily importable in Libreoffice Calc, Excel or any plotting software</p>
 
-<p>This is a draft version, tested with two modules, works in direct usb mode, but still buggy when VirtualHub is running...</p>
+<p>This is a draft version, tested with three modules (1 Meteo &amp; 2 thermocouples), works in direct usb mode, or with VirtualHub running.</p>
 
 <hr><h2>
 <a name="required-components" class="anchor" href="#required-components"><span class="octicon octicon-link"></span></a>Required components</h2>
@@ -80,12 +80,14 @@ Separators are spaces, easily importable in Libreoffice Calc, Excel or any plott
 <li>Same date should be saved in text file in column </li>
 <li>Name of the text file will be Date-time-modules-types.txt</li>
 <li>for example: 2013-08-18-08-12-21-Thermo-Meteo.txt</li>
+<li>Optional: Type Meteo+TC.py name will append a name to the data file</li>
+<li>for example: 2013-08-18-08-12-21-Thermo-Meteo-name.txt</li>
 </ul><h2>
 <a name="stoping-the-program" class="anchor" href="#stoping-the-program"><span class="octicon octicon-link"></span></a>Stoping the program</h2>
 
 <ul>
 <li>Type [Ctrl+C] to stop</li>
-<li>Import data file in any graphic software</li>
+<li>Import data file in any graphic software (delimiter are spaces)</li>
 <li>Have fun !</li>
 </ul>
         </section>
