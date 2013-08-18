@@ -8,13 +8,13 @@ This small program allows displaying in a terminal (text mode, updated every sec
 * Humidity
 * Temperature(s)
 
-from **[Yocto-Meteo](http://www.yoctopuce.com/EN/products/capteurs-usb/yocto-meteo)** module
-and/or two temperatures from **[Yocto-Thermocouples](http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple)** module.
+from zero to one **[Yocto-Meteo](http://www.yoctopuce.com/EN/products/capteurs-usb/yocto-meteo)** module
+and/or zero to three thermocouples **[Yocto-Thermocouples](http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple)** module(s).
 
-At the same type a text file is created, updated every second: **Date-Time-Module1-Module2.txt**. 
+At the same type a text file is created, updated every second (by default): **Date-Time-Module1-Module2-....txt**. 
 Separators are spaces, easily importable in Libreoffice Calc, Excel or any plotting software
 
-This is a draft version, tested with two modules, works in direct usb mode, but still buggy when VirtualHub is running...
+This is a draft version, tested with three modules, works in direct usb mode, but still buggy when VirtualHub is running...
 
 ***
 
@@ -41,10 +41,12 @@ This is a draft version, tested with two modules, works in direct usb mode, but 
 * Same date should be saved in text file in column 
 * Name of the text file will be Date-time-modules-types.txt
 * for example: 2013-08-18-08-12-21-Thermo-Meteo.txt
+* Optional: Type Meteo+TC.py name will append a name to the data file
+* for example: 2013-08-18-08-12-21-Thermo-Meteo_name.txt
 
 ## Stoping the program
 
 * Type [Ctrl+C] to stop
-* Import data file in any graphic software
+* Import data file in any graphic software (delimiter are spaces)
 * Have fun !
 
