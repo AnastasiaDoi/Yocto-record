@@ -46,10 +46,10 @@ This is a draft version, tested with three modules (1 Meteo & 2 thermocouples), 
 
 ## Data file example
 
-Day Time Temperature(°C) Pressure(mb) RH(%) Module: METEOMK1-0D163
-2013/08/19 14:18:41 24.0 1016 43
-2013/08/19 14:18:42 24.0 1016 43
-2013/08/19 14:18:43 24.0 1016 43
+Day Time Temperature(°C) Pressure(mb) RH(%) Module: METEOMK1-0D163  
+2013/08/19 14:18:41 24.0 1016 43  
+2013/08/19 14:18:42 24.0 1016 43  
+2013/08/19 14:18:43 24.0 1016 43  
 
 ## Stoping the program
 
