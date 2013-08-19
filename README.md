@@ -38,11 +38,18 @@ This is a draft version, tested with three modules (1 Meteo & 2 thermocouples), 
 * Type Meteo+TC.py
 * Names of the recognized modules should appear
 * Date, time, temperatures, pressure & humidity should be displayed every second
-* Same date should be saved in text file in column 
+* Same data will be saved in text file in column 
 * Name of the text file will be Date-time-modules-types.txt
 * for example: 2013-08-18-08-12-21-Thermo-Meteo.txt
-* Optional: Type Meteo+TC.py name will append a name to the data file
-* for example: 2013-08-18-08-12-21-Thermo-Meteo_name.txt
+* Optional: Type Meteo+TC.py name => will append a name to the data file
+* for example: 2013-08-18-08-12-21-Thermo-Meteo-name.txt
+
+## Data file example
+
+Day Time Temperature(°C) Pressure(mb) RH(%) Module: METEOMK1-0D163
+2013/08/19 14:18:41 24.0 1016 43
+2013/08/19 14:18:42 24.0 1016 43
+2013/08/19 14:18:43 24.0 1016 43
 
 ## Stoping the program
 
