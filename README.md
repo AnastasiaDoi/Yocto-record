@@ -57,5 +57,5 @@ Day Time Temperature(°C) Pressure(mb) RH(%) Module: METEOMK1-0D163
 
 * Type [Ctrl+c] to stop the programm
 * Import data file in any graphic software (delimiter are spaces)
-* Have fun !
+* Have fun!
 
