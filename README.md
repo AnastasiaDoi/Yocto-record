@@ -25,7 +25,7 @@ works in direct usb mode, or with VirtualHub running.
 * Yocto-Meteo and/or Yocto-Thermocouples modules from Yoctopuce (http://www.yoctopuce.com/)
 * Yoctopuce Python libraries: http://www.yoctopuce.com/EN/libraries.php (YoctoLib.python.XXXX.zip)
 * Python 3.x: http://www.python.org/download/
-* Meteo+TC.py script
+* Meteo+TC.py script (from https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature)
 
 ## Installation
 
