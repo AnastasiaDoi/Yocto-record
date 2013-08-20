@@ -28,7 +28,7 @@ This is a draft version, tested with three modules (1 Meteo & 2 thermocouples), 
 ## Installation
 
 * Install Python (with option to declare path)
-* Copy content of the directory \YoctoLib.python.XXXX\Source\
+* Copy content of the directory \YoctoLib.python.XXXX\Source\ (yocto_api.py and other yocto_XXX.py files)
 * to ~\Python3.3\Lib\ directory were Python was installed
 
 ## Starting the program 
