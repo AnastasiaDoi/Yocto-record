@@ -1,27 +1,29 @@
 # Yoctopuce-Meteo-Temperature
 ===========================
 
-Data recording for Yoctopuce Meteo (Weather) and Thermocouples modules in Python 
+## Data recording for Yoctopuce Meteo (Weather) and Thermocouples modules in Python 
 
 This small program allows displaying in a terminal (text mode, updated every second):
 * Pressure
 * Humidity
 * Temperature(s)
 
-from zero to one **[Yocto-Meteo](http://www.yoctopuce.com/EN/products/capteurs-usb/yocto-meteo)** module
-and/or zero to three thermocouples **[Yocto-Thermocouples](http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple)** module(s).
+From zero to one **[Yocto-Meteo](http://www.yoctopuce.com/EN/products/capteurs-usb/yocto-meteo)**
+module and/or zero to three thermocouples
+**[Yocto-Thermocouples](http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple)** module(s).
 
 At the same type a text file is created, updated every second (by default): **Date-Time-Module1-Module2-....txt**. 
-Separators are spaces, easily importable in Libreoffice Calc, Excel or any plotting software
+Separators are spaces, easily importable in Libreoffice Calc, Excel or any plotting software.
 
-This is a draft version, tested with three modules (1 Meteo & 2 thermocouples), works in direct usb mode, or with VirtualHub running.
+This is a draft version, tested with three modules (1 Meteo & 2 thermocouples),
+works in direct usb mode, or with VirtualHub running.
 
 ***
 
 ## Required components
 
-* Yocto-Meteo and/or Yocto-Thermocouples modules from yoctopuce (http://www.yoctopuce.com/)
-* Yoctopuce Python libraries http://www.yoctopuce.com/EN/libraries.php (YoctoLib.python.XXXX.zip)
+* Yocto-Meteo and/or Yocto-Thermocouples modules from Yoctopuce (http://www.yoctopuce.com/)
+* Yoctopuce Python libraries: http://www.yoctopuce.com/EN/libraries.php (YoctoLib.python.XXXX.zip)
 * Python 3.x: http://www.python.org/download/
 * Meteo+TC.py script
 
@@ -34,7 +36,7 @@ This is a draft version, tested with three modules (1 Meteo & 2 thermocouples), 
 ## Starting the program 
 
 * Put Meteo+TC.py on any directory, where the datafiles will be stored
-* Open command prompt in this directory (shift+right click in Explorer)
+* Open command prompt in this directory (Windows user: shift+right click in Explorer)
 * Type Meteo+TC.py
 * Names of the recognized modules should appear
 * Date, time, temperatures, pressure & humidity should be displayed every second
@@ -53,7 +55,7 @@ Day Time Temperature(°C) Pressure(mb) RH(%) Module: METEOMK1-0D163
 
 ## Stoping the program
 
-* Type [Ctrl+C] to stop
+* Type [Ctrl+C] to stop the programm
 * Import data file in any graphic software (delimiter are spaces)
 * Have fun !
 
