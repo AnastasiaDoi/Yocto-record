@@ -66,6 +66,6 @@ Other settings are available in the program:
 ## Stoping the program
 
 * Type [`Ctrl+c`] to stop the programm
-* Import data file in any graphic software (delimiter are coma)
+* Import data file in any graphic software (delimiters are coma)
 * Have fun!
 
