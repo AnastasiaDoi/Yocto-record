@@ -1,44 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Yoctopuce-meteo-temperature by SebastienCaillat</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
     <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+    <title>Yoctopuce-meteo-temperature by SebastienCaillat</title>
   </head>
+
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
+    <header>
+      <div class="inner">
+        <h1>Yoctopuce-meteo-temperature</h1>
+        <h2>Data recording for Yoctopuce Meteo (Weather) and Thermocouples modules in Python </h2>
+        <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
 
-    <div class="wrapper">
-
-      <section>
-        <div id="title">
-          <h1>Yoctopuce-meteo-temperature</h1>
-          <p>Data recording for Yoctopuce Meteo (Weather) and Thermocouples modules in Python </p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/SebastienCaillat">SebastienCaillat</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
-
-        <h1>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a name="yoctopuce-meteo-temperature" class="anchor" href="#yoctopuce-meteo-temperature"><span class="octicon octicon-link"></span></a>Yoctopuce-Meteo-Temperature</h1>
 
 <h1></h1>
@@ -57,7 +47,7 @@ module and/or zero to three thermocouples
 <strong><a href="http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple">Yocto-Thermocouples</a></strong> module(s).</p>
 
 <p>At the same type a text file is created, updated every second (by default): <strong>Date-Time-Module1-Module2-....txt</strong>. 
-Separators are spaces, easily importable in Libreoffice Calc, Excel or any plotting software.</p>
+Separators are coma (or any other caracter), easily importable in Libreoffice Calc, Excel or any plotting software.</p>
 
 <p>This is a draft version, tested with three modules (1 Meteo &amp; 2 thermocouples),
 works in direct usb mode, or with VirtualHub running.</p>
@@ -90,28 +80,57 @@ to ~\Python3.3\Lib\ directory were Python was installed</li>
 <li>Same data will be saved in text file in column </li>
 <li>Name of the text file will be Date-time-modules-types.txt<br>
 =&gt; for example: 2013-08-18-08-12-21-Thermo-Meteo.txt</li>
-<li>Optional: Type Meteo+TC.py name =&gt; will append a name to the data file<br>
-=&gt; for example: 2013-08-18-08-12-21-Thermo-Meteo-name.txt</li>
 </ul><h2>
 <a name="data-file-example" class="anchor" href="#data-file-example"><span class="octicon octicon-link"></span></a>Data file example</h2>
 
 <p>Day Time Temperature(°C) Pressure(mb) RH(%) Module: METEOMK1-0D163<br>
-2013/08/19 14:18:41 24.0 1016 43<br>
-2013/08/19 14:18:42 24.0 1016 43<br>
-2013/08/19 14:18:43 24.0 1016 43  </p>
+2013/08/19 14:18:41,24.0,1016,43<br>
+2013/08/19 14:18:42,24.0,1016,43<br>
+2013/08/19 14:18:43,24.0,1016,43  </p>
 
 <h2>
+<a name="settings" class="anchor" href="#settings"><span class="octicon octicon-link"></span></a>Settings</h2>
+
+<p>Some settings are avalaible using argument:</p>
+
+<ul>
+<li>Meteo+TC.py name =&gt; will append a name to the data file<br>
+=&gt; for example: 2013-08-18-08-12-21-Thermo-Meteo-name.txt</li>
+<li>Meteo+TC.py nofile to avoid saving to datafile</li>
+<li>Meteo+TC.py help or ? for a very short help<br>
+</li>
+</ul><p>Other settings are available in the program:</p>
+
+<ul>
+<li>Sample time: default is 1 second, automaticaly adjusted by the program to include script run time </li>
+<li>Separator: default is coma (,)</li>
+</ul><h2>
 <a name="stoping-the-program" class="anchor" href="#stoping-the-program"><span class="octicon octicon-link"></span></a>Stoping the program</h2>
 
 <ul>
 <li>Type [Ctrl+c] to stop the programm</li>
-<li>Import data file in any graphic software (delimiter are spaces)</li>
+<li>Import data file in any graphic software (delimiter are coma)</li>
 <li>Have fun!</li>
 </ul>
-      </section>
+        </section>
 
+        <aside id="sidebar">
+          <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature"></a> is maintained by <a href="https://github.com/SebastienCaillat">SebastienCaillat</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
+  
   </body>
 </html>
