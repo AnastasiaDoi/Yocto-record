@@ -69,8 +69,8 @@ works in direct usb mode, or with VirtualHub running.</p>
 
 <ul>
 <li>Install Python (with option to declare path)</li>
-<li>Copy content of the directory \YoctoLib.python.XXXX\Source\ (yocto_api.py and other yocto_XXX.py files)
-to ~\Python3.3\Lib\ directory were Python was installed</li>
+<li>Copy content of the directory <code>\YoctoLib.python.XXXX\Source\</code> (<code>yocto_api.py</code> and others <code>yocto_XXX.py</code> files)
+to <code>~\Python3.3\Lib\</code> directory were Python is installed</li>
 </ul><h2>
 <a name="starting-the-program" class="anchor" href="#starting-the-program"><span class="octicon octicon-link"></span></a>Starting the program</h2>
 
@@ -84,7 +84,9 @@ to ~\Python3.3\Lib\ directory were Python was installed</li>
 <li>Name of the text file will be Date-time-modules-types.txt<br>
 =&gt; for example: <code>2013-08-18-08-12-21-Thermo-Meteo.txt</code>
 </li>
-</ul><h2>
+</ul><p><strong>Warning:</strong> Starting for Python IDLE will make data file empty (I don't know why...)</p>
+
+<h2>
 <a name="data-file-example" class="anchor" href="#data-file-example"><span class="octicon octicon-link"></span></a>Data file example</h2>
 
 <pre><code>Day Time Temperature(°C) Pressure(mb) RH(%) Module: METEOMK1-0D163  
@@ -108,11 +110,13 @@ to ~\Python3.3\Lib\ directory were Python was installed</li>
 <li>
 <code>Meteo+TC.py help</code> or <code>?</code> for a very short help<br>
 </li>
-</ul><p>Other settings are available in the program:</p>
+</ul><p>Other settings are available in the program (see settings section):</p>
 
 <ul>
-<li>Sample time: default is 1 second, automaticaly adjusted by the program to include script run time </li>
+<li>Sample time: default is 1 second (automaticaly adjusted by the program to include script run time)</li>
 <li>Separator: default is coma (,)</li>
+<li>File extension: .txt or .csv</li>
+<li>Time by default is in iso format i.e. 2013-09-16T08:52:35.589860, can be chaged to custom</li>
 </ul><h2>
 <a name="stoping-the-program" class="anchor" href="#stoping-the-program"><span class="octicon octicon-link"></span></a>Stoping the program</h2>
 
