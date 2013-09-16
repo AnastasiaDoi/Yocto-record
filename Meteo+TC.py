@@ -1,27 +1,32 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Display and recording script for Yoctopuce modules(s)
-# Ready for zero/one Yocto-Meteo and/or one to three Yocto-Thermocouples Modules
-# Tested with Python 3.3 (http://www.python.org/download/)
-# Content of directory \YoctoLib.python.XXXX\Source\ (yocto_xxx.py files)  
-# Downloadable here: http://www.yoctopuce.com/EN/libraries.php (YoctoLib.python.XXXX.zip)
-# must be in ~\Python3.3\Lib\ directory, with the other *.py files
-# or uncomment following lines to add ../../Sources to the PYTHONPATH (adjust for your case)
-# sys.path.append(os.path.join("..","..","Sources"))
-# For detailed instructions: https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/
-# Type meteo+tc.py in console to start program
-#      meteo+tc.py name to append 'name' to the file name (optional)
-#      meteo+tc.py help or ? for short instructions
-# Last update S. Caillat 22/08/2013
+""" Display and recording script for Yoctopuce modules(s)
+ Ready for zero/one Yocto-Meteo and/or one to three Yocto-Thermocouples Modules
+ Tested with Python 3.3 (http://www.python.org/download/)
+ must be started from command line (not from IDLE) to have datafile
+ 
+ Warning:
+ Content of directory \YoctoLib.python.XXXX\Source\ (yocto_xxx.py files)  
+ downloadable here: http://www.yoctopuce.com/EN/libraries.php (YoctoLib.python.XXXX.zip)
+ must be in ~\Python3.3\Lib\ directory, with the other *.py files
+  or uncomment following lines to add ../../Sources to the PYTHONPATH (adjust for your case)
+ sys.path.append(os.path.join("..","..","Sources"))
+
+ For detailed instructions:
+ https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/
+ Type meteo+tc.py in console to start program
+      meteo+tc.py name to append 'name' to the file name (optional)
+      meteo+tc.py help or ? for short instructions
+ Last update S. Caillat 16/09/2013"""
 
 import os,sys,time,datetime
-time0 = time.time()
+time0 = time.time()             # Time 0 to know initialisation time
 from yocto_api import *
 from yocto_humidity import *
 from yocto_temperature import *
 from yocto_pressure import *
 
-def help():
+def help():                     # Need help ?
     scriptname = os.path.basename(sys.argv[0])
     print("Usage:")
     print(scriptname+' with no argument: print & save data to file')
@@ -30,16 +35,21 @@ def help():
     print('See settings section in '+scriptname+' for other options') 
     sys.exit()
 
+def nowformat(iso): # Define date & time format in saved datafile
+    if iso == True : now = datetime.datetime.now().isoformat()
+    else : now = time.strftime('%Y/%m/%d %H:%M:%S')
+    return now
+
 # Adjust interval time for data display & recording (module sleep time)
 # Parameters are target time, real time, adjusted sleep value,
 #                relaxation factor, tolerance (in percentage) & status
-def adjust_time(target,loop,adjusted,rel,tol,mode): 
+def adjust_time(target,loop,adjusted,rel,tol,status): 
     diff = loop*1000 - target
     ratio = abs (diff/target)
-    if ratio < tol : return adjusted  # Do noting if under tolerance
-    if mode == "talk" : print ("Adjusting interval, target",target,\
-    ",adj. %4.0f" %adjusted,",act. %4.0f" %(loop*1000),",er.: %0.3f" %ratio,\
-    "% >",tol,"%") # Display message if time is adjusted
+    if ratio < tol : return adjusted    # Do noting if under tolerance
+    if status == True :                 # Display message if time is adjusted
+        print ("Adjusting interval, target",target,",adj. %4.0f" %adjusted,\
+        ",act. %4.0f" %(loop*1000),",er.: %0.3f" %ratio,"% >",tol,"%") 
     if diff > 0 : adjusted = adjusted - diff/rel
     elif diff < 0 : adjusted = adjusted + abs(diff/rel)
     return adjusted
@@ -47,27 +57,28 @@ def adjust_time(target,loop,adjusted,rel,tol,mode):
 # Manage connexion or module error messages
 def die(msg): sys.exit(msg+' (check USB cable)')
 errmsg=YRefParam()
-                    # ----------- Settings -------------------
-                    # Inteval between two recordings, including script to run
+# ------------------------------------- Settings ------------------------------
+                    # Interval between two recordings, including script to run
 sleep_target = 1000 # unit millisecond (1000 = 1 sec) (usage 900~1000 or more)
                     # Time will be adjusted to reach target
-sleep_adjusted=sleep_target
+sleep_adjusted=sleep_target # time initial value (can be reduced a little)
 relax = 5           # Factor for time loop adjustement (between 1 and 5) 
-tolerance = 0.005   # Percentage time error accepted (0.01 = 1 %) (0.01 ~ 0.002)
-#status = 'talk'    # display message at time adjust if value is 'talk'
-status = 'none'
+tolerance = 0.005   # Percentage time error accepted (0.01 = 1 %) (0.01 ~ 0.005)
+status = False      # True/False: display message at time adjust 
 sep = ","           # Separator for data file (recommended " " or ",")
-savedata = True     # default value, data is saved unless <nofile> as argument
-
+ext = "csv"         # "txt" or "csv" data file extension
+savedata = True     # True/False: data is saved, unless <nofile> as argument
+iso = True          # True/False: iso or custom time format (see nowformat)
+# ------------------------------------- Settings ------------------------------
 if len(sys.argv) > 1:
     projectname=sys.argv[1]  # Project name to add to filename
     if projectname =='help' or projectname =='?': help()
     if projectname =='nofile': savedata = False
 
 if YAPI.RegisterHub("http://127.0.0.1:4444") == 0:
-    print ("VirtualHub is on")
+    print ("VirtualHub is on\n")
 if YAPI.RegisterHub("usb") == 0:
-    print ("VirtualHub is off")
+    print ("VirtualHub is off\n")
 
 # retreive any humidity and temperature sensor
 sensorH = YHumidity.FirstHumidity()
@@ -83,8 +94,7 @@ else:
         humSensor = YHumidity.FindHumidity(target+'.humidity')
         pressSensor = YPressure.FindPressure(target+'.pressure')
         tempSensor = YTemperature.FindTemperature(target+'.temperature')
-        # retreive Meteo module serial
-        serial=sensorH.get_module().get_serialNumber()
+        serial=sensorH.get_module().get_serialNumber() # Meteo module serial
         logical=sensorH.get_module().get_logicalName()
 
 if sensorT is None:
@@ -132,7 +142,7 @@ while module is not None:
             channel5 = YTemperature.FindTemperature(module3name+'.temperature1')
             channel6 = YTemperature.FindTemperature(module3name+'.temperature2')
      module = module.nextModule()
-print ("Total:",modulequantity, "module(s) connected")
+print ("Total:",modulequantity, "module(s) connected \n")
 
 if savedata is True:        # Set data file name: date-time-module(s).txt
     filename = module1 
@@ -140,10 +150,11 @@ if savedata is True:        # Set data file name: date-time-module(s).txt
     if modulequantity == 3: filename = filename+'-'+module2+'-'+module3
     if len(sys.argv) > 1: filename = filename+'-'+projectname
     nowdash = time.strftime('%Y-%m-%d-%H-%M-%S')
-    filename = nowdash+'-'+filename+'.txt'
+    filename = nowdash+'-'+filename+'.'+ext
     print ("Saving data to: "+filename)
     f=open(filename,'w')    # Open data file
-# print ('Init done in %2.3f' %(time.time()-time0), "s") # if needed
+if status == True :
+    print ('Initialisation done in %2.3f' %(time.time()-time0), "seconds") 
 
 # Following blocs are for one, two or three modules connected
 # One module: Meteo
@@ -151,17 +162,16 @@ if modulequantity == 1 and module1 == 'Meteo':
     print ('Meteo alone')
     print ("Time Temperature (°C) Pressure (mb) RH (%) (ctrl-c to stop) "+serial)
     if savedata == True :
-        f.write("Day Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"\
-                +sep+"RH(%)"+sep+"Module: "+serial+"\n") 
+        f.write("Day-Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"\
+                +sep+"RH(%)"+sep+"Module: "+serial+"\n")
     while True:
         time_loop = time.time()
         nowshort = time.strftime('%H:%M:%S')
         print(nowshort +" | %2.1f" % tempSensor.get_currentValue()\
         +" °C %4.0f" % pressSensor.get_currentValue()\
-        +" mb %2.0f" % humSensor.get_currentValue())
+        +" mb %2.0f" % humSensor.get_currentValue()+ " %")
         if savedata == True:
-            now = time.strftime('%Y/%m/%d %H:%M:%S')
-            f.write(now+sep+'%2.1f' % tempSensor.get_currentValue()\
+            f.write(nowformat(iso)+sep+'%2.1f' % tempSensor.get_currentValue()\
             +sep+"%4.0f" % pressSensor.get_currentValue()\
             +sep+"%2.0f" % humSensor.get_currentValue()+"\n")    
         YAPI.Sleep(sleep_adjusted)
@@ -182,8 +192,7 @@ if modulequantity == 1 and module1 == 'Thermo':
         print(nowshort + " | %4.1f" % channel1.get_currentValue()\
         + " °C %4.1f" % channel2.get_currentValue()+ " °C")
         if savedata == True:
-            now = time.strftime('%Y/%m/%d %H:%M:%S')
-            f.write(now+sep+"%4.1f" % channel1.get_currentValue()\
+            f.write(nowformat(iso)+sep+"%4.1f" % channel1.get_currentValue()\
             +sep+"%4.1f" % channel2.get_currentValue()+"\n")    
         YAPI.Sleep(sleep_adjusted)
         time_loop = time.time()-time_loop
@@ -196,7 +205,7 @@ if modulequantity == 2 and module1 == 'Thermo' and module2 == 'Meteo':
     print("Time Temp. (°C) Pres. (mb) RH (%)"+\
           " Temp-1 (°C) Temp-2 (°C) (ctrl-c to stop)")
     if savedata == True:
-        f.write("Day Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"+sep+"RH(%)"\
+        f.write("Day-Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"+sep+"RH(%)"\
                 +sep+"Temp-1(°C)"+sep+"Temp-2(°C)"+sep+"Modules: "\
                 +serial+" & "+module1name+"\n")
     while True:
@@ -208,8 +217,7 @@ if modulequantity == 2 and module1 == 'Thermo' and module2 == 'Meteo':
         + " % |"+" %4.1f" % channel1.get_currentValue()\
         + " °C %4.1f" % channel2.get_currentValue()+ " °C")
         if savedata == True:
-            now = time.strftime('%Y/%m/%d %H:%M:%S')
-            f.write(now+sep+"%2.1f" % tempSensor.get_currentValue()\
+            f.write(nowformat(iso)+sep+"%2.1f" % tempSensor.get_currentValue()\
             +sep+"%4.0f" % pressSensor.get_currentValue()\
             +sep+"%2.0f" % humSensor.get_currentValue()\
             +sep+"%4.1f" % channel1.get_currentValue()\
@@ -225,7 +233,7 @@ if modulequantity == 2 and module2 == 'Thermo' and module1 == 'Meteo':
     print("Time Temp. (°C) Pres. (mb) RH (%)"+\
           " Temp-1 (°C) Temp-2 (°C) (ctrl-c to stop)")
     if savedata == True:
-        f.write("Day Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"+sep+"RH(%)"\
+        f.write("Day-Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"+sep+"RH(%)"\
                 +sep+"Temp-1(°C)"+sep+"Temp-2(°C)"+sep+"Modules: "\
                 +serial+" & "+module1name+"\n")
     while True:
@@ -237,8 +245,7 @@ if modulequantity == 2 and module2 == 'Thermo' and module1 == 'Meteo':
         + " % |"+" %4.1f" % channel3.get_currentValue()\
         + " °C %4.1f" % channel4.get_currentValue()+ " °C")
         if savedata == True:
-            now = time.strftime('%Y/%m/%d %H:%M:%S')
-            f.write(now+sep+"%2.1f" % tempSensor.get_currentValue()\
+            f.write(nowformat(iso)+sep+"%2.1f" % tempSensor.get_currentValue()\
             +sep+"%4.0f" % pressSensor.get_currentValue()\
             +sep+"%2.0f" % humSensor.get_currentValue()\
             +sep+"%4.1f" % channel3.get_currentValue()\
@@ -253,7 +260,7 @@ if modulequantity == 2 and module1 == 'Thermo' and module2 == 'Thermo':
     print ('Temp & Temp')
     print("Time Temp-1 (°C) Temp-2 (°C) Temp-3 (°C) Temp-4 (°C) (ctrl-c to stop)")
     if savedata == True :
-        f.write("Day Time"+sep+"Temp-1(°C)"+sep+"Temp-2(°C)"\
+        f.write("Day-Time"+sep+"Temp-1(°C)"+sep+"Temp-2(°C)"\
                 +sep+"Temp-3(°C)"+sep+"Temp-4(°C)"\
                 +sep+"Modules: "+module1name+" & "+module2name+"\n")
     while True:
@@ -264,8 +271,7 @@ if modulequantity == 2 and module1 == 'Thermo' and module2 == 'Thermo':
         + " °C %4.1f" % channel3.get_currentValue()\
         + " °C %4.1f" % channel4.get_currentValue()+ " °C")
         if savedata == True:
-            now = time.strftime('%Y/%m/%d %H:%M:%S')
-            f.write(now+sep+"%4.1f" % channel1.get_currentValue()\
+            f.write(nowformat(iso)+sep+"%4.1f" % channel1.get_currentValue()\
             +sep+"%4.1f" % channel2.get_currentValue()\
             +sep+"%4.1f" % channel3.get_currentValue()\
             +sep+"%4.1f" % channel4.get_currentValue()+"\n")
@@ -280,7 +286,7 @@ if modulequantity == 3 and module1 == 'Thermo' and module2 == 'Thermo'\
     print ('Meteo and Temp & Temp')
     print("Time T (°C) Pres. (mb) RH (%) T-1 (°C) T-2 (°C) T-3 (°C) T-4 (°C) (ctrl-c stop)")
     if savedata == True :
-        f.write("Day Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"\
+        f.write("Day-Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"\
                 +sep+"RH(%)"+sep+"Temp-1(°C)"+sep+"Temp-2(°C)"\
                 +sep+"Temp-3(°C)"+sep+"Temp-4(°C)"+sep+"Modules: "\
                 +serial+" & "+module1name+" & "+module2name+"\n") 
@@ -295,8 +301,7 @@ if modulequantity == 3 and module1 == 'Thermo' and module2 == 'Thermo'\
         + " °C %4.1f" % channel3.get_currentValue()\
         + " °C %4.1f" % channel4.get_currentValue()+ " °C")
         if savedata == True :
-            now = time.strftime('%Y/%m/%d %H:%M:%S')
-            f.write(now+sep+"%2.1f" % tempSensor.get_currentValue()\
+            f.write(nowformat(iso)+sep+"%2.1f" % tempSensor.get_currentValue()\
             +sep+"%4.0f" % pressSensor.get_currentValue()\
             +sep+"%2.0f" % humSensor.get_currentValue()\
             +sep+"%4.1f" % channel1.get_currentValue()\
@@ -315,7 +320,7 @@ if modulequantity == 3 and module1 == 'Thermo' and module3 == 'Thermo'\
     print("Time T (°C) Pres. (mb) RH (%)"\
           +"T-1 (°C) T-2 (°C) T-3 (°C) T-4 (°C) (ctrl-c stop)")
     if savedata == True:
-        f.write("Day Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"+sep+"RH(%)"\
+        f.write("Day-Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"+sep+"RH(%)"\
                 +sep+"Temp-1(°C)"+sep+"Temp-2(°C)"+sep+"Temp-3(°C)"+sep+"Temp-4(°C)"\
                 +sep+"Modules: "+serial+" & "+module1name+" & "+module2name+"\n") 
     while True :
@@ -329,8 +334,7 @@ if modulequantity == 3 and module1 == 'Thermo' and module3 == 'Thermo'\
         + " °C %4.1f" % channel5.get_currentValue()\
         + " °C %4.1f" % channel6.get_currentValue()+ " °C")
         if savedata == True :
-            now = time.strftime('%Y/%m/%d %H:%M:%S')
-            f.write(now+sep+"%2.1f" % tempSensor.get_currentValue()\
+            f.write(nowformat(iso)+sep+"%2.1f" % tempSensor.get_currentValue()\
             +sep+"%4.0f" % pressSensor.get_currentValue()\
             +sep+"%2.0f" % humSensor.get_currentValue()\
             +sep+"%4.1f" % channel1.get_currentValue()\
@@ -349,7 +353,7 @@ if modulequantity == 3 and module2 == 'Thermo' and module3 == 'Thermo'\
     print("Time T (°C) Pres. (mb) RH (%)"\
           +"T-1 (°C) T-2 (°C) T-3 (°C) T-4 (°C) (ctrl-c stop)")
     if savedata == True:
-        f.write("Day Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"+sep+"RH(%)"\
+        f.write("Day-Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"+sep+"RH(%)"\
                 +sep+"Temp-1(°C)"+sep+"Temp-2(°C)"+sep+"Temp-3(°C)"+sep+"Temp-4(°C)"\
                 +sep+"Modules: "+serial+" & "+module1name+" & "+module2name+"\n") 
     while True :
@@ -363,8 +367,7 @@ if modulequantity == 3 and module2 == 'Thermo' and module3 == 'Thermo'\
         + " °C %4.1f" % channel5.get_currentValue()\
         + " °C %4.1f" % channel6.get_currentValue()+ " °C")
         if savedata == True :
-            now = time.strftime('%Y/%m/%d %H:%M:%S')
-            f.write(now+sep+"%2.1f" % tempSensor.get_currentValue()\
+            f.write(nowformat(iso)+sep+"%2.1f" % tempSensor.get_currentValue()\
             +sep+"%4.0f" % pressSensor.get_currentValue()\
             +sep+"%2.0f" % humSensor.get_currentValue()\
             +sep+"%4.1f" % channel3.get_currentValue()\
@@ -383,7 +386,7 @@ if modulequantity == 3 and module1 == 'Thermo'\
     print("Time T-1 (°C) T-2 (°C) T-3 (°C) T-4"\
           +"(°C) T-5 (°C) T-6 (°C) (ctrl-c stop)")
     if savedata == True:
-        f.write("Day Time"+sep+"Temp-1(°C)"+sep+"Temp-2(°C)"\
+        f.write("Day-Time"+sep+"Temp-1(°C)"+sep+"Temp-2(°C)"\
                 +sep+"Temp-3(°C)"+sep+"Temp-4(°C)"\
                 +sep+"Temp-5(°C)"+sep+"Temp-6(°C)"+sep+"Modules: "\
                 +module1name+" & "+module2name+" & "+module3name+"\n") 
@@ -397,8 +400,7 @@ if modulequantity == 3 and module1 == 'Thermo'\
         + " °C %4.1f" % channel5.get_currentValue()\
         + " °C %4.1f" % channel6.get_currentValue()+ " °C")
         if savedata == True:
-            now = time.strftime('%Y/%m/%d %H:%M:%S')
-            f.write(now+sep+"%4.1f" % channel1.get_currentValue()\
+            f.write(nowformat(iso)+sep+"%4.1f" % channel1.get_currentValue()\
             +sep+"%4.1f" % channel2.get_currentValue()\
             +sep+"%4.1f" % channel3.get_currentValue()\
             +sep+"%4.1f" % channel4.get_currentValue()\
