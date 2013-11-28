@@ -1,88 +1,89 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>Yoctopuce-meteo-temperature by SebastienCaillat</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Yocto-record : Data recording for Yocto-Thermocouple and Yocto-Meteo (Weather) modules in Python " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Yocto-record</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
 
-        <header>
-          <h1>Yoctopuce-meteo-temperature</h1>
-          <h2>Data recording for Yoctopuce Meteo (Weather) and Thermocouples modules in Python </h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/SebastienCaillat/Yocto-record">View on GitHub</a>
+
+          <h1 id="project_title">Yocto-record</h1>
+          <h2 id="project_tagline">Data recording for Yocto-Thermocouple and Yocto-Meteo (Weather) modules in Python </h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/SebastienCaillat/Yocto-record/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/SebastienCaillat/Yocto-record/tarball/master">Download this project as a tar.gz file</a>
+            </section>
         </header>
+    </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <h1>
-<a name="yoctopuce-meteo-temperature" class="anchor" href="#yoctopuce-meteo-temperature"><span class="octicon octicon-link"></span></a>Yoctopuce-Meteo-Temperature</h1>
-
-<h1></h1>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="yocto-record" class="anchor" href="#yocto-record"><span class="octicon octicon-link"></span></a>Yocto-record</h1>
 
 <h2>
-<a name="data-recording-for-yoctopuce-meteo-weather-and-thermocouples-modules-in-python" class="anchor" href="#data-recording-for-yoctopuce-meteo-weather-and-thermocouples-modules-in-python"><span class="octicon octicon-link"></span></a>Data recording for Yoctopuce Meteo (Weather) and Thermocouples modules in Python</h2>
+<a name="data-recording-for-yocto-thermocouple-and-yocto-meteo-weather-modules-in-python" class="anchor" href="#data-recording-for-yocto-thermocouple-and-yocto-meteo-weather-modules-in-python"><span class="octicon octicon-link"></span></a>Data recording for Yocto-Thermocouple and Yocto-Meteo (Weather) modules in Python</h2>
 
-<p>This small program allows displaying in a terminal (text mode, updated every second):</p>
+<p>This small program allows to display and record <strong>temperature</strong>, <strong>humidity</strong> and <strong>pressure</strong> from <strong><a href="http://www.yoctopuce.com/EN/products/capteurs-usb/yocto-meteo">Yocto-Meteo</a></strong>
+module or <strong><a href="http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple">Yocto-Thermocouples</a></strong> module(s).</p>
 
-<ul>
-<li>Pressure</li>
-<li>Humidity</li>
-<li>Temperature(s)</li>
-</ul><p>From zero to one <strong><a href="http://www.yoctopuce.com/EN/products/capteurs-usb/yocto-meteo">Yocto-Meteo</a></strong>
-module and/or zero to three thermocouples
-<strong><a href="http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple">Yocto-Thermocouples</a></strong> module(s).</p>
+<p>Data are displayed in a terminal (text mode) and updated every second (or any selected time interval).</p>
 
-<p>At the same type a text file is created, updated every second (by default): <strong>Date-Time-Module1-Module2-....txt</strong>. 
-Separators are coma (or any other caracter), easily importable in Libreoffice Calc, Excel or any plotting software.</p>
+<p>Recordings are saved in a text file: <strong>Date-Time-Module1-Module2-xxx.csv</strong>. Separators are coma (can be changed), easily importable in Libreoffice Calc, Excel or any plotting software.</p>
 
-<p>This is a draft version, tested with three modules (1 Meteo &amp; 2 thermocouples),
+<p>This version was tested with three modules (meteo &amp; thermocouples),
 works in direct usb mode, or with VirtualHub running.</p>
 
-<hr><h2>
+<h2>
+<a name="updates" class="anchor" href="#updates"><span class="octicon octicon-link"></span></a>Updates</h2>
+
+<ul>
+<li>2013/11: Thanks to Yoctopuce support team, added basic error <a href="http://docs.python.org/3.3/tutorial/errors.html#handling-exceptions">exceptions handling</a> with (<code>try</code> &amp; <code>except</code>), project name changed to yocto-record.py</li>
+<li>2013/09: Meteo+tc.py first version.</li>
+</ul><hr><h2>
 <a name="required-components" class="anchor" href="#required-components"><span class="octicon octicon-link"></span></a>Required components</h2>
 
 <ul>
 <li>Yocto-Meteo and/or Yocto-Thermocouples modules from Yoctopuce (<a href="http://www.yoctopuce.com/">http://www.yoctopuce.com/</a>)</li>
-<li>Yoctopuce Python libraries: <a href="http://www.yoctopuce.com/EN/libraries.php">http://www.yoctopuce.com/EN/libraries.php</a> (YoctoLib.python.XXXX.zip)</li>
+<li>Yoctopuce Python libraries: <a href="http://www.yoctopuce.com/EN/libraries.php">http://www.yoctopuce.com/EN/libraries.php</a> (<code>YoctoLib.python.XXXX.zip</code>)</li>
 <li>Python 3.x: <a href="http://www.python.org/download/">http://www.python.org/download/</a>
 </li>
-<li>Meteo+TC.py script (from <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature">https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature</a>)</li>
+<li>
+<code>yocto-record.py</code> script (from <a href="https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature">https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature</a>)</li>
 </ul><h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <ul>
-<li>Install Python (with option to declare path)</li>
+<li>Install Python (with option to declare path for Windows users)</li>
 <li>Copy content of the directory <code>\YoctoLib.python.XXXX\Source\</code> (<code>yocto_api.py</code> and others <code>yocto_XXX.py</code> files)
 to <code>~\Python3.3\Lib\</code> directory were Python is installed</li>
 </ul><h2>
 <a name="starting-the-program" class="anchor" href="#starting-the-program"><span class="octicon octicon-link"></span></a>Starting the program</h2>
 
 <ul>
-<li>Put <code>Meteo+TC.py</code> on any directory, where the datafiles will be stored</li>
+<li>Put <code>yocto-record.py</code> on any directory, where the datafiles will be stored</li>
 <li>Open command prompt in this directory (Windows user: shift+right click in Explorer)</li>
-<li>Type <code>Meteo+TC.py</code><br>
+<li>Linux users, allow file to be executable, type: <code>chmod +x yocto-record.py</code>
+</li>
+<li>Type <code>yocto-record.py</code> (Win) or <code>./yocto-record.py</code> (Linux)<br>
 =&gt; Names of the recognized module(s) should appear<br>
 =&gt; Date, time, temperatures, pressure &amp; humidity should be displayed every second</li>
-<li>Same data will be saved in text file in column </li>
-<li>Name of the text file will be Date-time-modules-types.txt<br>
-=&gt; for example: <code>2013-08-18-08-12-21-Thermo-Meteo.txt</code>
+<li>Data will be saved in text file in column</li>
+<li>Name of the text file will be <code>Date-time-modules-types.csv</code> 
+=&gt; for example: <code>2013-08-18-08-12-21-Thermo-Meteo.csv</code>
 </li>
 </ul><p><strong>Warning:</strong> Starting for Python IDLE will make data file empty (I don't know why...)</p>
 
@@ -98,17 +99,17 @@ to <code>~\Python3.3\Lib\</code> directory were Python is installed</li>
 <h2>
 <a name="settings" class="anchor" href="#settings"><span class="octicon octicon-link"></span></a>Settings</h2>
 
-<p>Some settings are avalaible using argument:</p>
+<p>Some settings are avalaible using arguments:</p>
 
 <ul>
 <li>
-<code>Meteo+TC.py name</code> =&gt; will append a name to the data file<br>
-=&gt; for example: <code>2013-08-18-08-12-21-Thermo-Meteo-name.txt</code>
+<code>yocto-record.py name</code> =&gt; will append a name to the data file<br>
+=&gt; for example: <code>2013-08-18-08-12-21-Thermo-Meteo-name.csv</code>
 </li>
 <li>
-<code>Meteo+TC.py nofile</code> to avoid saving to datafile</li>
+<code>yocto-record.py nofile</code> to avoid saving to datafile</li>
 <li>
-<code>Meteo+TC.py help</code> or <code>?</code> for a very short help<br>
+<code>yocto-record.py help</code> or <code>?</code> for a very short help<br>
 </li>
 </ul><p>Other settings are available in the program (see settings section):</p>
 
@@ -125,15 +126,18 @@ to <code>~\Python3.3\Lib\</code> directory were Python is installed</li>
 <li>Import data file in any graphic software (delimiters are coma)</li>
 <li>Have fun!</li>
 </ul>
-        </section>
-
-        <footer>
-          Yoctopuce-meteo-temperature is maintained by <a href="https://github.com/SebastienCaillat">SebastienCaillat</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
-      </div>
+      </section>
     </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Yocto-record maintained by <a href="https://github.com/SebastienCaillat">SebastienCaillat</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
   </body>
 </html>
