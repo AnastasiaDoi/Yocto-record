@@ -1,6 +1,6 @@
 # Yocto-record
 
-## Data recording for Yocto-Meteo (Weather) and Yocto-Thermocouple in Python 
+## Data recording for Yocto-Thermocouple and Yocto-Meteo (Weather) modules in Python 
 
 This small program allows to display and record **temperature**, **humidity** and **pressure** from **[Yocto-Meteo](http://www.yoctopuce.com/EN/products/capteurs-usb/yocto-meteo)**
 module or **[Yocto-Thermocouples](http://www.yoctopuce.com/EN/products/usb-sensors/yocto-thermocouple)** module(s).
