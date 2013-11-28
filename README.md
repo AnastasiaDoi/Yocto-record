@@ -1,5 +1,4 @@
-# Yoctopuce-Meteo-Temperature
-===========================
+# Yocto-Record
 
 ## Data recording for Yocto-Meteo (Weather) and Yocto-Thermocouple in Python 
 
@@ -14,7 +13,7 @@ This version was tested with three modules (meteo & thermocouples),
 works in direct usb mode, or with VirtualHub running.
 
 ## Updates
-- 2013/11: Thanks to Yoctopuce support team, added basic error [exceptions handling] (http://docs.python.org/3.3/tutorial/errors.html#handling-exceptions) with (`try` & `except`) 
+- 2013/11: Thanks to Yoctopuce support team, added basic error [exceptions handling] (http://docs.python.org/3.3/tutorial/errors.html#handling-exceptions) with (`try` & `except`), project name changed to yocto-record.py
 - 2013/09: Meteo+tc.py first version.
 
 
