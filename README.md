@@ -1,4 +1,4 @@
-# Yocto-Record
+# Yocto-record
 
 ## Data recording for Yocto-Meteo (Weather) and Yocto-Thermocouple in Python 
 
