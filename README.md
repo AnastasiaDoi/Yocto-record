@@ -7,12 +7,13 @@ module or **[Yocto-Thermocouples](http://www.yoctopuce.com/EN/products/usb-senso
 
 Data are displayed in a terminal (text mode) and updated every second (or any selected time interval).
 
-Recordings are saved in a text file: **Date-Time-Module1-Module2-xxx.csv**. Separators are coma (can be changed), easily importable in Libreoffice Calc, Excel or any plotting software.
+Recordings are saved in a text file: **Date-Time-Module1-Module2-xxx.csv**. Separators are coma (can be changed), easily importable in [Libreoffice Calc](https://www.libreoffice.org/), Excel or any plotting software.
 
 This version was tested with three modules (meteo & thermocouples),
 works in direct usb mode, or with VirtualHub running.
 
 ## Updates
+- 2014/08: Minor changes
 - 2013/11: Thanks to Yoctopuce support team, added basic error [exceptions handling] (http://docs.python.org/3.3/tutorial/errors.html#handling-exceptions) with (`try` & `except`), project name changed to yocto-record.py
 - 2013/09: Meteo+tc.py first version.
 
