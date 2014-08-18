@@ -1,35 +1,45 @@
+#! python3
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """ Display and recording script for Yoctopuce modules(s)
 
  Ready for zero/one Yocto-Meteo and/or one to three Yocto-Thermocouples Modules
- Tested with Python 3.3 (http://www.python.org/download/)
+ Tested with Python 3.x (http://www.python.org/download/)
  must be started from command line (not from IDLE) to have datafile
   
  Warning:
  Content of directory \YoctoLib.python.XXXX\Source\ (yocto_xxx.py files)  
  downloadable here: http://www.yoctopuce.com/EN/libraries.php (YoctoLib.python.XXXX.zip)
- must be in ~\Python3.3\Lib\ directory, with the other *.py files
-  or uncomment following lines to add ../../Sources to the PYTHONPATH (adjust for your case)
+ must be either in ~\Python3.x\Lib\ directory, with the others *.py files,
+ in this program directory, or at some stated place 
+ or uncomment following lines to add ../../Sources to the PYTHONPATH (adjust for your case)
  sys.path.append(os.path.join("..","..","Sources"))
 
  For detailed instructions:
  https://github.com/SebastienCaillat/Yoctopuce-Meteo-Temperature/
- Type yocto-record.py in console to start program
-      yocto-record.py name to append 'name' to the file name (optional)
-      yocto-record.py help or ? for short instructions
+ Type 'yocto-record.py' in console to start program
+      'yocto-record.py name' to append 'name' to the file name (optional)
+      'yocto-record.py nofile' for display only
+      'yocto-record.py 'help' or '?' for short instructions
 
- Last update S. Caillat 28/11/2013 """
-
+ Last update S. Caillat 19/08/2014 """
 import os,sys,time,datetime
-time0 = time.time()             # Time 0 to know initialisation time
-print ("Starting program")
 from yocto_api import *
 from yocto_humidity import *
 from yocto_temperature import *
 from yocto_pressure import *
 
-def help():                     # Need help ?
+# Welcome message + sys info
+line="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+print (line)
+time0 = time.time()             # Time 0 to know initialisation time
+scriptname = os.path.basename(sys.argv[0])
+print ("Starting program "+scriptname+"\nUnder Python %s"% (sys.version))
+print (line)
+
+# Some functions to be called later
+
+def help():      # Basic help message
     scriptname = os.path.basename(sys.argv[0])
     print("Usage:")
     print(scriptname+' with no argument: print & save data to file')
@@ -80,14 +90,18 @@ iso = True          # True/False: iso or custom time format (see nowformat)
 if len(sys.argv) > 1:
     projectname=sys.argv[1]  # Project name to add to filename
     if projectname =='help' or projectname =='?': help()
-    if projectname =='nofile': savedata = False
+    if projectname =='nofile':
+        savedata = False
+        print ("No recording mode")
+    else : print("Recording mode, project name: "+projectname)
+else : print("Recording mode")
 
 if YAPI.RegisterHub("http://127.0.0.1:4444") == 0:
-    print ("VirtualHub is on\n")
+    print ("VirtualHub is on")
 if YAPI.RegisterHub("usb") == 0:
-    print ("VirtualHub is off\n")
+    print ("VirtualHub is off")
 
-# Retreive any humidity and temperature sensor
+# Retrieve any humidity and temperature sensor
 sensorH = YHumidity.FirstHumidity()
 sensorT = YTemperature.FirstTemperature()
 
@@ -149,7 +163,7 @@ while module is not None:
             channel5 = YTemperature.FindTemperature(module3name+'.temperature1')
             channel6 = YTemperature.FindTemperature(module3name+'.temperature2')
      module = module.nextModule()
-print ("Total:",modulequantity, "module(s) connected \n")
+print ("Total:",modulequantity, "module(s) connected")
 
 if savedata is True:        # Set data file name: date-time-module(s).txt
     filename = module1 
@@ -161,14 +175,15 @@ if savedata is True:        # Set data file name: date-time-module(s).txt
     print ("Saving data to: "+filename)
     f=open(filename,'w')    # Open data file
 if status == True :
-    print ('Initialisation done in %2.3f' %(time.time()-time0), "seconds") 
+    print ('Initialisation done in %2.3f' %(time.time()-time0), "seconds")
+print (line)
 
 # Following blocs are for one, two or three modules connected
 
 # One module: Meteo
 if modulequantity == 1 and module1 == 'Meteo':
     print ('Meteo alone')
-    print ("Time Temperature (°C) Pressure (mb) RH (%) (ctrl-c to stop) "+serial)
+    print ("Time Temperature (°C) Pressure (mb) RH (%) (ctrl-c to stop)")
     if savedata == True :
         f.write("Day-Time"+sep+"Temperature(°C)"+sep+"Pressure(mb)"\
                 +sep+"RH(%)"+sep+"Module: "+serial+"\n")
@@ -193,7 +208,7 @@ if modulequantity == 1 and module1 == 'Meteo':
 # One module: Thermocouples 
 if modulequantity == 1 and module1 == 'Thermo':
     print ('Thermo alone')
-    print ("Time Temp-1 (°C) Temp-2 (°C) (ctrl-c to stop) "+module1name)
+    print ("Time Temp-1 (°C) Temp-2 (°C) (ctrl-c to stop)")
     if savedata == True :
         f.write("Day Time"+sep+"Temp-1(°C)"+sep+"Temp-2(°C)"\
                     +sep+"Module: "+module1name+"\n")
